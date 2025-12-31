@@ -25,12 +25,12 @@ ________________________________________
 
 
 3. Tools and Technologies Used
-Tool / Technology	Description
-VHDL	Hardware Description Language
-ModelSim (Intel FPGA 2020.1)	Simulation and waveform analysis
-IEEE Libraries	STD_LOGIC_1164, NUMERIC_STD
-Target Architecture	16-bit Processor
-Design Style	Modular & Structural
+Tool / Technology	Description:
+:VHDL	Hardware Description Language
+:ModelSim (Intel FPGA 2020.1)	Simulation and waveform analysis
+:IEEE Libraries	STD_LOGIC_1164, NUMERIC_STD
+:Target Architecture	16-bit Processor
+:Design Style	Modular & Structural
 ________________________________________
 4. Overall Processor Architecture
 The processor follows a single-cycle, synchronous architecture.
@@ -70,10 +70,10 @@ Function:
 Performs arithmetic and logical operations.
 Supported Operations:
 alu_op	Operation
-0000	ADD
-0001	SUB
-0010	AND
-0011	OR
+0000	    ADD
+0001	    SUB
+0010    	AND
+0011    	OR
 ________________________________________
 5.4 Status Flags
 The ALU generates four status flags:
@@ -89,14 +89,14 @@ ________________________________________
 Function:
 Decodes the opcode field of the instruction and generates control signals.
 Opcode Mapping:
-Opcode	Instruction	reg_wr_en	use_imm	alu_op
-0000	ADD	1	0	0000
-0001	SUB	1	0	0001
-1000	ADDI	1	1	0000
-Others	NOP	0	0	0000
+Opcode	Instruction	| reg_wr_en	| use_imm	| alu_op
+0000	      ADD	          1        	0        0000
+0001	      SUB	          1        	0        0001
+1000	      ADDI        	1        	1        0000
+Others	    NOP          	0        	0        0000
 Note: pc_inc is always enabled.
 Verified using: tb_controlunit16.vhd
-________________________________________
+
 5.6 CPU16 – Top-Level Processor
 Function:
 Integrates all modules to form a complete processor.
@@ -111,11 +111,12 @@ Key Outputs:
 •	pc_out – Program Counter value
 •	debug – Register read data
 •	flags_out – Status flags (Z C N V)
-Verified using: tb_cpu16.vhd________________________________________
+Verified using: tb_cpu16.vhd
+
 6. Instruction Format
 | 15–12  | 11–8 | 7–4 |    3–0          |
 | opcode | Rd   | Rs1 | Rs2 / Immediate |
-________________________________________
+
 7. Testbench Strategy
 Each module was tested using an independent, self-checking testbench with the following principles:
 •	Proper signal initialization (no U values)
@@ -123,6 +124,7 @@ Each module was tested using an independent, self-checking testbench with the fo
 •	Assertions for correctness checking
 •	Adequate simulation time
 •	Clean waveform observation
+
 Testbenches Implemented
 •	tb_pc16.vhd
 •	tb_regfile16x16.vhd
@@ -148,7 +150,7 @@ During the project, common VHDL issues were identified and resolved:
 •	Incorrect VHDL-2002 constructs
 •	Missing port connections
 •	Insufficient simulation time
-These were corrected using:
+  These were corrected using:
 •	Proper signal initialization
 •	Synchronous reset handling
 •	Internal signals instead of reading outputs
